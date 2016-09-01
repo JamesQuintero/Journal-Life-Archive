@@ -1,4 +1,6 @@
-﻿using System;
+﻿//handles captions for images through XML files. 
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;

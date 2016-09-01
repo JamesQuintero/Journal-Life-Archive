@@ -49,13 +49,6 @@ namespace Journal
             
             xml = new XML_handler();
 
-
-            
-
-
-
-
-
             show_panel("entries");
             populate_entries("");
 
@@ -609,7 +602,6 @@ namespace Journal
                     new_month = Array.IndexOf(months, split_date[0]) + 1;
                 }
                 catch (Exception exception){
-                    Console.WriteLine(exception.ToString());
                     return "";
                 }
 
@@ -938,11 +930,7 @@ namespace Journal
                 else
                     toolStripStatusLabel1.Text = "Entry doesn't exist...";
 
-
-                
             }
-            
-
         }
         
 
@@ -1102,8 +1090,7 @@ namespace Journal
         private void Listbox_entries_MouseMove(object sender, MouseEventArgs e)
         {
             int index = Listbox_entries.IndexFromPoint(e.Location.X, e.Location.Y);
-            //Console.WriteLine("Mousemove: " + e.Location.X + " " + e.Location.Y);
-
+            
             try
             {
                 //redraw hover item background
