@@ -2,6 +2,7 @@
 
 Life Archive is a journal where you can save life events in text and pictures. 
 
+![Preview](http://i.imgur.com/M7zXxf1.png)
 
 Features: 
 - Text entries that can be searched
@@ -15,6 +16,7 @@ All entries are saved in C:\Users\xxxxxx\Documents\Journal\Entries.
 
 Future features: 
 - Video support
+- Text and pictures shown together
 - Preference setting to change default entry save directory (current default is C:\Users\xxxxx\Documents\Journal\Entries).
 - Keywords for text and pictures for better searchability
 - Collapsible year folders to reduce clutter if there are a lot of entries. 
