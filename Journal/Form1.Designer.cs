@@ -38,6 +38,7 @@
             this.Textbox_log = new System.Windows.Forms.RichTextBox();
             this.Textbox_log2 = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.richTextBox_caption = new System.Windows.Forms.RichTextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.Label_no_images = new System.Windows.Forms.Label();
             this.listView1 = new System.Windows.Forms.ListView();
@@ -76,7 +77,6 @@
             this.pref_textbox1 = new System.Windows.Forms.TextBox();
             this.pref_label1 = new System.Windows.Forms.Label();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.richTextBox_caption = new System.Windows.Forms.RichTextBox();
             this.contextMenuStrip1.SuspendLayout();
             this.Tab_entry_field.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -198,6 +198,24 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Media";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // richTextBox_caption
+            // 
+            this.richTextBox_caption.AcceptsTab = true;
+            this.richTextBox_caption.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.richTextBox_caption.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.richTextBox_caption.DetectUrls = false;
+            this.richTextBox_caption.Font = new System.Drawing.Font("Proxima Nova Rg", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richTextBox_caption.Location = new System.Drawing.Point(181, 376);
+            this.richTextBox_caption.Name = "richTextBox_caption";
+            this.richTextBox_caption.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
+            this.richTextBox_caption.Size = new System.Drawing.Size(622, 74);
+            this.richTextBox_caption.TabIndex = 3;
+            this.richTextBox_caption.Text = "";
+            this.richTextBox_caption.Enter += new System.EventHandler(this.richTextBox_caption_Enter);
+            this.richTextBox_caption.KeyDown += new System.Windows.Forms.KeyEventHandler(this.richTextBox_caption_KeyDown);
+            this.richTextBox_caption.Leave += new System.EventHandler(this.richTextBox_caption_Leave);
             // 
             // pictureBox1
             // 
@@ -520,7 +538,7 @@
             // entriesToolStripMenuItem
             // 
             this.entriesToolStripMenuItem.Name = "entriesToolStripMenuItem";
-            this.entriesToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
+            this.entriesToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
             this.entriesToolStripMenuItem.Text = "Journal";
             this.entriesToolStripMenuItem.Click += new System.EventHandler(this.entriesToolStripMenuItem_Click);
             // 
@@ -616,24 +634,6 @@
             this.pref_label1.Size = new System.Drawing.Size(86, 16);
             this.pref_label1.TabIndex = 0;
             this.pref_label1.Text = "Entry Storage:";
-            // 
-            // richTextBox_caption
-            // 
-            this.richTextBox_caption.AcceptsTab = true;
-            this.richTextBox_caption.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBox_caption.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.richTextBox_caption.DetectUrls = false;
-            this.richTextBox_caption.Font = new System.Drawing.Font("Proxima Nova Rg", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox_caption.Location = new System.Drawing.Point(181, 376);
-            this.richTextBox_caption.Name = "richTextBox_caption";
-            this.richTextBox_caption.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.richTextBox_caption.Size = new System.Drawing.Size(622, 74);
-            this.richTextBox_caption.TabIndex = 3;
-            this.richTextBox_caption.Text = "";
-            this.richTextBox_caption.Enter += new System.EventHandler(this.richTextBox_caption_Enter);
-            this.richTextBox_caption.KeyDown += new System.Windows.Forms.KeyEventHandler(this.richTextBox_caption_KeyDown);
-            this.richTextBox_caption.Leave += new System.EventHandler(this.richTextBox_caption_Leave);
             // 
             // Form1
             // 
