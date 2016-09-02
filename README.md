@@ -23,5 +23,5 @@ Future features:
 
 
 Known bugs: 
-- List of pictures for an entry will reload/flicker when a picture of deleted from that list. 
+- List of pictures for an entry will reload/flicker when a picture is deleted from that list. 
 - Memory leak when thumbnails are created for newly added pictures.
