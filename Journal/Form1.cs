@@ -49,6 +49,13 @@ namespace Journal
             
             xml = new XML_handler();
 
+
+            
+
+
+
+
+
             show_panel("entries");
             populate_entries("");
 
@@ -64,6 +71,7 @@ namespace Journal
             //Adds drag and drop functionality
             panel3_drag_drop.DragEnter += new DragEventHandler(Form1_DragEnter);
             panel3_drag_drop.DragDrop += new DragEventHandler(Form1_DragDrop);
+            
 
             //reset_toolstrip(null, new EventArgs());
             toolStripStatusLabel1.Text = "";
@@ -602,6 +610,7 @@ namespace Journal
                     new_month = Array.IndexOf(months, split_date[0]) + 1;
                 }
                 catch (Exception exception){
+                    Console.WriteLine(exception.ToString());
                     return "";
                 }
 
@@ -879,6 +888,7 @@ namespace Journal
         private void delete_image(object sender, EventArgs e)
         {
             string image_path=contextMenu_item_delete.Tag.ToString();
+            contextMenu_item_delete.Click -= delete_image;
 
             
             if(File.Exists(image_path))
@@ -886,14 +896,14 @@ namespace Journal
                 //deletes the image and its thumbnail
                 File.Delete(image_path);
                 //File.Delete(Path.ChangeExtension(image_path, "thumb"));
-            }
 
-            //if no media for entry before, make entry date text black to show now has media
-            string[] existing_images = Directory.GetFiles(path + "/" + Textbox_log.Tag.ToString());
-            if (existing_images.Length == 1)
-            {
-                get_journal_entries("");
-                Listbox_entries.Refresh();
+                //if no media for entry before, make entry date text black to show now has media
+                string[] existing_images = Directory.GetFiles(path + "/" + Textbox_log.Tag.ToString());
+                if (existing_images.Length == 1)
+                {
+                    get_journal_entries("");
+                    Listbox_entries.Refresh();
+                }
             }
 
             load_entry(null, new EventArgs());
@@ -903,6 +913,7 @@ namespace Journal
         private void delete_entry(object sender, EventArgs e)
         {
             string entry = contextMenu_item_delete.Tag.ToString();
+            contextMenu_item_delete.Click -= delete_entry;
 
             string numeric_entry="";
             if(radioButton1_textual_dates.Checked)
@@ -930,7 +941,11 @@ namespace Journal
                 else
                     toolStripStatusLabel1.Text = "Entry doesn't exist...";
 
+
+                
             }
+            
+
         }
         
 
@@ -949,6 +964,7 @@ namespace Journal
                     contextMenuStrip1.Show();
 
                     contextMenu_item_delete.Tag = Listbox_entries.SelectedItem.ToString();
+                    contextMenu_item_delete.Click -= delete_entry;
                     contextMenu_item_delete.Click += delete_entry;
                 }
             }
@@ -983,6 +999,7 @@ namespace Journal
                     {
                         //MessageBox.Show(listView1.SelectedItems[index].Tag.ToString());
                         contextMenu_item_delete.Tag = listView1.SelectedItems[index].Tag.ToString();
+                        contextMenu_item_delete.Click -= delete_image;
                         contextMenu_item_delete.Click += delete_image;
                     }
                 }
@@ -990,6 +1007,7 @@ namespace Journal
                 {
                     //MessageBox.Show(lvi.Tag.ToString());
                     contextMenu_item_delete.Tag = lvi.Tag.ToString();
+                    contextMenu_item_delete.Click -= delete_image;
                     contextMenu_item_delete.Click += delete_image;
                 }
             }
@@ -1090,7 +1108,8 @@ namespace Journal
         private void Listbox_entries_MouseMove(object sender, MouseEventArgs e)
         {
             int index = Listbox_entries.IndexFromPoint(e.Location.X, e.Location.Y);
-            
+            //Console.WriteLine("Mousemove: " + e.Location.X + " " + e.Location.Y);
+
             try
             {
                 //redraw hover item background
