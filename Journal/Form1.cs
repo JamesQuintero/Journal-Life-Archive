@@ -693,8 +693,12 @@ namespace Journal
                 pictureBox1.Tag = image_path;
                 richTextBox_caption.Tag = image_path;
 
+                //gets relative path instead of absolute path
+                String[] split_string = image_path.Split('\\');
+                string caption_path = split_string[split_string.Length - 1];
+
                 //image caption
-                string caption = xml.get_caption(path + "/" + get_selected_date() + "/metadata.xml", image_path);
+                string caption = xml.get_caption(path + "/" + get_selected_date() + "/metadata.xml", caption_path);
                 richTextBox_caption.Text = caption;
                 if (caption != "")
                     richTextBox_caption_Enter(null, new EventArgs());
@@ -1194,9 +1198,14 @@ namespace Journal
                 string date = get_selected_date();
 
                 string image_path = pictureBox1.Tag.ToString();
+
+                //gets relative path instead of absolute path
+                String[] split_string = image_path.Split('\\');
+                string caption_path = split_string[split_string.Length-1];
+
                 string caption = richTextBox_caption.Text;
 
-                xml.add_caption(path+"/"+date+"/metadata.xml", image_path, caption);
+                xml.add_caption(path+"/"+date+"/metadata.xml", caption_path, caption);
 
 
                 //removes annoying windows beep sound effect
