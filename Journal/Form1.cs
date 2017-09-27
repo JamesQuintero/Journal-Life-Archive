@@ -48,12 +48,7 @@ namespace Journal
                 Directory.CreateDirectory(path);
             
             xml = new XML_handler();
-
-
             
-
-
-
 
 
             show_panel("entries");
@@ -71,7 +66,6 @@ namespace Journal
             //Adds drag and drop functionality
             panel3_drag_drop.DragEnter += new DragEventHandler(Form1_DragEnter);
             panel3_drag_drop.DragDrop += new DragEventHandler(Form1_DragDrop);
-            
 
             //reset_toolstrip(null, new EventArgs());
             toolStripStatusLabel1.Text = "";
@@ -369,22 +363,24 @@ namespace Journal
         private void create_entry(object sender, EventArgs e)
         {
             //string entry_date = Textbox_new_entry.Text;
-            int year=Int32.Parse(dateTimePicker1.Value.Date.Year.ToString());
+            //int year=Int32.Parse(dateTimePicker1.Value.Date.Year.ToString());
+            string year = dateTimePicker1.Value.Date.Year.ToString();
             string month=dateTimePicker1.Value.Date.Month.ToString();
             string day=dateTimePicker1.Value.Date.Day.ToString();
 
-            //converts 2016 to 16
-            if (year > 2000)
-                year -= 2000;
-            else if (year > 1900)
-                year -= 1900;
-            string new_year = year.ToString();
+            ////converts 2016 to 16
+            //if (year > 2000)
+            //    year -= 2000;
+            //else if (year > 1900)
+            //    year -= 1900;
+            //string new_year = year.ToString();
 
-            //turns 1-1-8 into 1-1-08
-            if (year < 10)
-                new_year = "0" + new_year;
+            ////turns 1-1-8 into 1-1-08
+            //if (year < 10)
+            //    new_year = "0" + new_year;
 
-            string numeric_date = month + "-" + day + "-" + new_year;
+            //string numeric_date = month + "-" + day + "-" + new_year;
+            string numeric_date = year + "-" + month + "-" + day;
 
                 //creates entry folder
                 string new_path = path + "/" + numeric_date;
@@ -574,19 +570,27 @@ namespace Journal
         }
 
         //converts 5-7-16 to May 7, 2016
+        //converts May 7, 2016 to 5-7-16
         private string convert_date(string type, string date)
         {
             if (type == "textual")
             {
+                //Console.WriteLine("Getting textual version: "+date);
+
                 string[] split_date = date.Split('-');
 
-                int month = Int32.Parse(split_date[0]);
-                int day = Int32.Parse(split_date[1]);
-                int year = Int32.Parse(split_date[2]);
+                //int month = Int32.Parse(split_date[0]);
+                //int day = Int32.Parse(split_date[1]);
+                //int year = Int32.Parse(split_date[2]);
+
+                int year = Int32.Parse(split_date[0]);
+                int month = Int32.Parse(split_date[1]);
+                int day = Int32.Parse(split_date[2]);
 
                 //converts month and year
                 string[] months = { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
-                string new_year = (year + 2000).ToString();
+                //string new_year = (year + 2000).ToString();
+                string new_year = year.ToString();
                 string new_month = months[month - 1];
 
 
@@ -595,6 +599,9 @@ namespace Journal
             }
             else if (type == "numeric")
             {
+                //Console.WriteLine("Getting numeric version");
+                //Console.WriteLine("Date: " + date);
+
                 //removes "," from January 15, 2016
                 StringBuilder temp_date = new StringBuilder(date);
                 temp_date.Replace(",", "");
@@ -614,25 +621,32 @@ namespace Journal
                     return "";
                 }
 
-                //converts year
-                int year = Int32.Parse(split_date[2]);
-                string new_year = (year - 2000).ToString();
-                if (year - 2000 < 10)
-                    new_year = "0" + new_year;
+                ////converts year
+                //int year = Int32.Parse(split_date[2]);
+                //string new_year = (year - 2000).ToString();
+                //if (year - 2000 < 10)
+                //    new_year = "0" + new_year;
+                string new_year = split_date[2];
 
                 //doesn't need to convert day
                 string day = split_date[1];
 
-                return new_month + "-" + day + "-" + new_year;
+                //return new_month + "-" + day + "-" + new_year;
+                return new_year + "-" + new_month + "-" + day;
             }
             //should already be in Numeric format
             else if (type == "long_number")
             {
+                //Console.WriteLine("Getting long number version: "+date);
+
                 string[] split_date = date.Split('-');
 
-                int month = Int32.Parse(split_date[0]);
-                int day = Int32.Parse(split_date[1]);
-                int year = Int32.Parse(split_date[2]);
+                //int month = Int32.Parse(split_date[0]);
+                //int day = Int32.Parse(split_date[1]);
+                //int year = Int32.Parse(split_date[2]);
+                int year = Int32.Parse(split_date[0]);
+                int month = Int32.Parse(split_date[1]);
+                int day = Int32.Parse(split_date[2]);
 
 
                 string new_month = "";
@@ -888,7 +902,6 @@ namespace Journal
         private void delete_image(object sender, EventArgs e)
         {
             string image_path=contextMenu_item_delete.Tag.ToString();
-            contextMenu_item_delete.Click -= delete_image;
 
             
             if(File.Exists(image_path))
@@ -896,14 +909,14 @@ namespace Journal
                 //deletes the image and its thumbnail
                 File.Delete(image_path);
                 //File.Delete(Path.ChangeExtension(image_path, "thumb"));
+            }
 
-                //if no media for entry before, make entry date text black to show now has media
-                string[] existing_images = Directory.GetFiles(path + "/" + Textbox_log.Tag.ToString());
-                if (existing_images.Length == 1)
-                {
-                    get_journal_entries("");
-                    Listbox_entries.Refresh();
-                }
+            //if no media for entry before, make entry date text black to show now has media
+            string[] existing_images = Directory.GetFiles(path + "/" + Textbox_log.Tag.ToString());
+            if (existing_images.Length == 1)
+            {
+                get_journal_entries("");
+                Listbox_entries.Refresh();
             }
 
             load_entry(null, new EventArgs());
@@ -913,7 +926,6 @@ namespace Journal
         private void delete_entry(object sender, EventArgs e)
         {
             string entry = contextMenu_item_delete.Tag.ToString();
-            contextMenu_item_delete.Click -= delete_entry;
 
             string numeric_entry="";
             if(radioButton1_textual_dates.Checked)
@@ -964,7 +976,6 @@ namespace Journal
                     contextMenuStrip1.Show();
 
                     contextMenu_item_delete.Tag = Listbox_entries.SelectedItem.ToString();
-                    contextMenu_item_delete.Click -= delete_entry;
                     contextMenu_item_delete.Click += delete_entry;
                 }
             }
@@ -999,7 +1010,6 @@ namespace Journal
                     {
                         //MessageBox.Show(listView1.SelectedItems[index].Tag.ToString());
                         contextMenu_item_delete.Tag = listView1.SelectedItems[index].Tag.ToString();
-                        contextMenu_item_delete.Click -= delete_image;
                         contextMenu_item_delete.Click += delete_image;
                     }
                 }
@@ -1007,7 +1017,6 @@ namespace Journal
                 {
                     //MessageBox.Show(lvi.Tag.ToString());
                     contextMenu_item_delete.Tag = lvi.Tag.ToString();
-                    contextMenu_item_delete.Click -= delete_image;
                     contextMenu_item_delete.Click += delete_image;
                 }
             }
