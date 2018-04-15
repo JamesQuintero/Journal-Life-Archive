@@ -906,9 +906,10 @@ namespace Journal
         private void delete_image(object sender, EventArgs e)
         {
             string image_path=contextMenu_item_delete.Tag.ToString();
+            contextMenu_item_delete.Click -= delete_image;
 
-            
-            if(File.Exists(image_path))
+
+            if (File.Exists(image_path))
             {
                 //deletes the image and its thumbnail
                 File.Delete(image_path);
